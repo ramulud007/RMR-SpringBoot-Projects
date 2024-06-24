@@ -1,0 +1,36 @@
+
+server:
+   port: 9091
+
+spring:
+ application:
+  name: API-Gatway
+  
+  cloud:
+    gateway:
+      routes:
+      - id: CATEGORY-SERVICE
+        uri: lb://CATEGORY-SERVICE
+        predicates:
+        - Path=/category/add-category
+        
+      - id: PRODUCT-SERVICE
+        uri: lb://PRODUCT-SERVICE
+        predicates:
+        - Path=/product/add-Product
+        
+      - id: SUPPLIER-SERVICE
+        uri: lb://SUPPLIER-SERVICE
+        predicates:
+        - Path=/supplier/add-Supplier
+     
+    eureka:
+    client:
+      registerWithEureka: true
+      fetchRegistry: ture
+      service-url:
+        defaultzone: http://localhost:8761/eureka/
+      instance:
+       hostname: localhost
+        
+        
